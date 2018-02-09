@@ -9,7 +9,7 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 
 const index = require('./routes/index');
-const users = require('./routes/users');
+const auth = require('./routes/auth');
 
 const app = express();
 
@@ -54,7 +54,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // ROUTES
 app.use('/', index);
-app.use('/users', users);
+app.use('/auth', auth);
 
 // ERROR HANDLERS
 app.use((req, res, next) => {
