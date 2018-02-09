@@ -1,16 +1,27 @@
-<form id="form" action="/signup" method="POST">
-  <label for="username">Username</label><br>
-  <input type="text" name="username"
-    placeholder="JohnDoe">
-
-  <br><br>
-  <label for="password">Password</label><br>
-  <input type="password" name="password"
-    placeholder="Password">
-  <br><br>
-
-  <button>Create account</button>
+<h1>Sign Up</h1>
+<form class="signup-form" action="/auth/signup" method="POST">
+  <div class="signup-input">
+      <label for="name">Name:</label><br>
+      <input type="text" name="name" id="name" placeholder="John Doe">
+    </div>
+  <div class="signup-input">
+    <label for="username">Username:</label><br>
+    <input type="text" name="username" id="username" placeholder="JohnDoe">
+  </div>
+  <div class="signup-input">
+    <label for="password">Password:</label><br>
+    <input type="password" name="password" id="password" placeholder="Password">
+  </div>
+  <div class="signup-radio" id="myRadio">
+    <label class="label-role student" for="checkbox-student">Student</label>
+    <input type="radio" name="checkbox-role" value="student" id="checkbox-student" />
+    <label class="label-role employer" for="checkbox-employer">Employer</label>
+    <input type="radio" name="checkbox-role" value="employer" id="checkbox-employer" />
+  </div>
+  <div class="signup-btn">
+    <button>Create account</button>
+  </div>
   <% if (typeof(message) != "undefined") { %>
-      <div class="error-message"><%= message %></div>
-    <% } %>
+    <div class="error-message"><p><%= message %></p></div>
+  <% } %>
 </form>
