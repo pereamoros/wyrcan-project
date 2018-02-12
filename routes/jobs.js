@@ -47,6 +47,18 @@ router.post('/create-job', (req, res, next) => {
     .catch(next);
 });
 
+router.get('/:id/apply', (req, res, next) => {
+  if (req.session.currentUser === 'employer') {
+    res.redirect('/:id');
+  }
+  const jobId = req.params.id;
+  Job.findById(jobId)
+    .then((job) => {
+      res.render('jobs/job-apply', {job});
+    })
+    .catch(next);
+});
+
 router.get('/:id', (req, res, next) => {
   if (req.session.currentUser === 'student') {
     res.redirect('/:id/apply');
@@ -57,12 +69,6 @@ router.get('/:id', (req, res, next) => {
       res.render('jobs/job-id', {job});
     })
     .catch(next);
-});
-
-router.get('/:id/apply', (req, res, next) => {
-  if (req.session.currentUser === 'employer') {
-    res.redirect('/:id');
-  }
 });
 
 module.exports = router;
