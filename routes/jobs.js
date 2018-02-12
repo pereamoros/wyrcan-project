@@ -13,8 +13,30 @@ router.get('/', (req, res, next) => {
 
 // -- Get create jobs
 
-router.get('/create', (req, res, next) => {
+router.get('/create-job', (req, res, next) => {
   res.render('jobs/create-job');
+});
+
+router.post('/create-job', (req, res, next) => {
+  const position = req.body.position;
+  const description = req.body.description;
+
+  if (position === '' || description === '') {
+    const data = {
+      message: 'All fields are required'
+    };
+    return res.render('jobs/create-job', data);
+  }
+  const newJob = new Jobs({
+    position,
+    description
+  });
+
+  newJob.save()
+    .then((response) => {
+      res.redirect('/my-jobs');
+    })
+    .catch(next);
 });
 
 module.exports = router;
