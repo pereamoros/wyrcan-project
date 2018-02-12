@@ -1,2 +1,10 @@
 <h1>My Jobs</h1>
 <p>You entered as an employer</p>
+
+<header>
+    <% if(user) { %>
+    <form action="/my-jobs" method="POST">
+      <button>Create a job</button>
+    </form>
+    <% } %>
+  </header>
