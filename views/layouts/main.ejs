@@ -5,7 +5,13 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <header></header>
+    <header>
+      <% if(user) { %>
+      <form action="auth/logout" method="POST">
+        <button>Log out</button>
+      </form>
+      <% } %>
+    </header>
     <div class="main-wrapper">
       <%- body %>
     </div>

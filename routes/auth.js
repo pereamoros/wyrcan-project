@@ -132,8 +132,8 @@ router.post('/login', (req, res, next) => {
     return res.redirect('/');
   }
 
-  var username = req.body.username;
-  var password = req.body.password;
+  const username = req.body.username;
+  const password = req.body.password;
 
   if (username === '' || password === '') {
     const data = {
@@ -150,7 +150,7 @@ router.post('/login', (req, res, next) => {
     if (!user) {
       const data = {
         title: 'Login',
-        message: 'Username or password are incorrect'
+        message: 'Username or password is incorrect'
       };
       return res.render('auth/login', data);
     }
@@ -161,7 +161,7 @@ router.post('/login', (req, res, next) => {
     } else {
       const data = {
         title: 'Login',
-        message: 'Username or password are incorrect'
+        message: 'Username or password is incorrect'
       };
       res.render('auth/login', data);
     }
