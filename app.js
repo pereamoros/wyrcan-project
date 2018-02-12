@@ -10,6 +10,7 @@ const MongoStore = require('connect-mongo')(session);
 
 const index = require('./routes/index');
 const auth = require('./routes/auth');
+const jobs = require('./routes/jobs');
 
 const app = express();
 
@@ -55,6 +56,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // ROUTES
 app.use('/', index);
 app.use('/auth', auth);
+app.use('/jobs', jobs);
 
 // ERROR HANDLERS
 app.use((req, res, next) => {
