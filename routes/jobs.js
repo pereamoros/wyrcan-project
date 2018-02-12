@@ -59,6 +59,26 @@ router.get('/:id/apply', (req, res, next) => {
     .catch(next);
 });
 
+router.post('/:id/apply', (req, res, next) => {
+  const applicant = req.session.currentUser._id;
+  const applicationText = req.body.application;
+  const jobId = req.params.id;
+  const updates = {
+    $set: {
+      applications: [{
+        user: applicant,
+        text: applicationText
+      }]
+    }
+  };
+
+  Job.update({_id: jobId}, updates)
+    .then((job) => {
+      res.redirect('/jobs');
+    })
+    .catch(next);
+});
+
 router.get('/:id', (req, res, next) => {
   if (req.session.currentUser === 'student') {
     res.redirect('/:id/apply');
