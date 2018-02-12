@@ -32,7 +32,8 @@ router.post('/create-job', (req, res, next) => {
   }
   const newJob = new Jobs({
     position,
-    description
+    description,
+    owner: req.session.currentUser._id
   });
 
   newJob.save()

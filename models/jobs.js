@@ -6,6 +6,7 @@ const Schema = mongoose.Schema;
 const jobSchema = new Schema({
   position: String,
   description: String,
+  owner: String,
   archive: Boolean,
   applications: [{
     user: String,
