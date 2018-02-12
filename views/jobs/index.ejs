@@ -3,16 +3,17 @@
   <p>You entered as a student</p>
   <div class="job-list">
     <% jobs.forEach((job) => { %>
+    <a href='jobs/<%= job._id%>'>
       <div class="job-item">
         <div class="job-position">
           <%= job.position %>
         </div>
         <div class="job-description">
           <%= job.description %>
-        </div>
+        </div>    
       </div>
+    </a>
     <% }) %>
-    
   </div>
 
 </div>
