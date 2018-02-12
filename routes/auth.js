@@ -126,7 +126,11 @@ router.post('/signup', (req, res, next) => {
     newUser.save()
       .then((response) => {
         req.session.currentUser = newUser;
-        res.redirect('/');
+        if (newUser.role === 'student') {
+          res.redirect('/jobs');
+        } else if (newUser.role === 'employer') {
+          res.redirect('/my-jobs');
+        }
       })
       .catch(next);
   });
