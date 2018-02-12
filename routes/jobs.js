@@ -22,6 +22,7 @@ router.get('/create-job', (req, res, next) => {
   res.render('jobs/create-job');
 });
 
+/* POST create jobs */
 router.post('/create-job', (req, res, next) => {
   const position = req.body.position;
   const description = req.body.description;
@@ -45,9 +46,25 @@ router.post('/create-job', (req, res, next) => {
     .catch(next);
 });
 
+/* GET job id */
+router.get('/:id', (req, res, next) => {
+  if (req.session.currentUser.role === 'student') {
+    const id = req.params.id;
+    res.redirect('/jobs/' + id + '/apply');
+  }
+  const jobId = req.params.id;
+  Job.findById(jobId)
+    .then((job) => {
+      res.render('jobs/job-id', {job});
+    })
+    .catch(next);
+});
+
+/* GET job apply */
 router.get('/:id/apply', (req, res, next) => {
   if (req.session.currentUser.role === 'employer') {
-    res.redirect('/:id');
+    const id = req.params.id;
+    res.redirect('/jobs/' + id);
   }
   const jobId = req.params.id;
   Job.findById(jobId)
@@ -57,6 +74,7 @@ router.get('/:id/apply', (req, res, next) => {
     .catch(next);
 });
 
+/* POST job apply */
 router.post('/:id/apply', (req, res, next) => {
   const applicant = req.session.currentUser.name;
   const applicationText = req.body.application;
@@ -73,18 +91,6 @@ router.post('/:id/apply', (req, res, next) => {
   Job.update({_id: jobId}, updates)
     .then((job) => {
       res.redirect('/jobs');
-    })
-    .catch(next);
-});
-
-router.get('/:id', (req, res, next) => {
-  if (req.session.currentUser.role === 'student') {
-    res.redirect('/:id/apply');
-  }
-  const jobId = req.params.id;
-  Job.findById(jobId)
-    .then((job) => {
-      res.render('jobs/job-id', {job});
     })
     .catch(next);
 });
