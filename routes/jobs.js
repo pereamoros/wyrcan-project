@@ -36,7 +36,8 @@ router.post('/create-job', (req, res, next) => {
   const newJob = new Job({
     position,
     description,
-    owner: req.session.currentUser._id
+    owner: req.session.currentUser._id,
+    archive: false
   });
 
   newJob.save()
@@ -88,6 +89,21 @@ router.post('/:id/apply', (req, res, next) => {
     }
   };
 
+  Job.update({_id: jobId}, updates)
+    .then((job) => {
+      res.redirect('/jobs');
+    })
+    .catch(next);
+});
+
+router.post('/:id', (req, res, next) => {
+  const jobId = req.params.id;
+
+  const updates = {
+    $set: {
+      archive: true
+    }
+  };
   Job.update({_id: jobId}, updates)
     .then((job) => {
       res.redirect('/jobs');

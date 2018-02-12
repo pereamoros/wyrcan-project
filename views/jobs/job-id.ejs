@@ -1,4 +1,9 @@
 <div class='job-details'>
+    <div class='archive-btn'>
+        <form method="POST" action="/jobs/<%= job._id%>">
+            <button>Archive</button>
+        </form>
+    </div>
     <h1>Job Details</h1>
     <div class='job-position'>
         <%= job.position %>
