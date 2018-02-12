@@ -46,7 +46,7 @@ router.post('/create-job', (req, res, next) => {
 });
 
 router.get('/:id/apply', (req, res, next) => {
-  if (req.session.currentUser === 'employer') {
+  if (req.session.currentUser.role === 'employer') {
     res.redirect('/:id');
   }
   const jobId = req.params.id;
@@ -78,7 +78,7 @@ router.post('/:id/apply', (req, res, next) => {
 });
 
 router.get('/:id', (req, res, next) => {
-  if (req.session.currentUser === 'student') {
+  if (req.session.currentUser.role === 'student') {
     res.redirect('/:id/apply');
   }
   const jobId = req.params.id;
