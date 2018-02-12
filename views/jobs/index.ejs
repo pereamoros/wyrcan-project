@@ -2,18 +2,18 @@
   <h1>Jobs list</h1>
   <p>You entered as a student</p>
   <div class="job-list">
-    <% jobs.forEach((job) => { %>
-    <a href='jobs/<%= job._id%>/apply'>
-      <div class="job-item">
-        <div class="job-position">
-          <%= job.position %>
-        </div>
-        <div class="job-description">
-          <%= job.description %>
-        </div>    
-      </div>
-    </a>
-    <% }) %>
-  </div>
-
+      <% jobs.forEach((job) => { %>
+        <a href='jobs/<%= job._id%>/apply'>
+          <div class="job-item">
+            <div class="job-position">
+              <%= job.position %>
+            </div>
+          <div class="job-description">
+              <%= job.description %>
+          </div>    
+         </div>
+        </a>
+        <% }) %>
+     </div>
 </div>
+
