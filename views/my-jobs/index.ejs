@@ -8,3 +8,14 @@
     </form>
     <% } %>
   </header>
+
+  
+  
+  <h2><ul>
+    <% jobs.forEach((jobs) => { %>
+      <li>
+         Job Position: <%= jobs.position %>  
+         Job Description: <%= jobs.description %> 
+      </li>
+    <% }) %>
+  </ul></h2>  
