@@ -14,9 +14,7 @@ router.get('/', (req, res, next) => {
     .then((jobs) => {
       res.render('jobs/index', {jobs});
     })
-    .catch(err => {
-      return next(err);
-    });
+    .catch(next);
 });
 
 /* GET create jobs */
