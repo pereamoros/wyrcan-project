@@ -60,15 +60,15 @@ router.get('/:id/apply', (req, res, next) => {
 });
 
 router.post('/:id/apply', (req, res, next) => {
-  const applicant = req.session.currentUser._id;
+  const applicant = req.session.currentUser.name;
   const applicationText = req.body.application;
   const jobId = req.params.id;
   const updates = {
-    $set: {
-      applications: [{
+    $addToSet: {
+      applications: {
         user: applicant,
         text: applicationText
-      }]
+      }
     }
   };
 
