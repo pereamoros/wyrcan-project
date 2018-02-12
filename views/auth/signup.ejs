@@ -1,27 +1,30 @@
+<div class="signup-wrapper">
 <h1>Sign Up</h1>
-<form class="signup-form" action="/auth/signup" method="POST">
-  <div class="signup-input">
-      <label for="name">Name:</label><br>
-      <input type="text" name="name" id="name" placeholder="John Doe">
+  <form class="signup-form" action="/auth/signup" method="POST">
+    <div class="form-input">
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name" placeholder="John Doe">
+      </div>
+    <div class="form-input">
+      <label for="username">Username:</label>
+      <input type="text" name="username" id="username" placeholder="JohnDoe">
     </div>
-  <div class="signup-input">
-    <label for="username">Username:</label><br>
-    <input type="text" name="username" id="username" placeholder="JohnDoe">
-  </div>
-  <div class="signup-input">
-    <label for="password">Password:</label><br>
-    <input type="password" name="password" id="password" placeholder="Password">
-  </div>
-  <div class="signup-radio" id="myRadio">
-    <label class="label-role student" for="checkbox-student">Student</label>
-    <input type="radio" name="role" value="student" id="checkbox-student" />
-    <label class="label-role employer" for="checkbox-employer">Employer</label>
-    <input type="radio" name="role" value="employer" id="checkbox-employer" />
-  </div>
-  <div class="signup-btn">
-    <button>Create account</button>
-  </div>
-  <% if (typeof(message) != "undefined") { %>
-    <div class="error-message"><p><%= message %></p></div>
-  <% } %>
-</form>
+    <div class="form-input">
+      <label for="password">Password:</label>
+      <input type="password" name="password" id="password" placeholder="Password">
+    </div>
+    <div class="signup-radio">
+      <label class="label-role student" for="role">Student</label>
+      <input type="radio" name="role" value="student" id="role" />
+      <label class="label-role employer" for="role">Employer</label>
+      <input type="radio" name="role" value="employer" id="role" />
+    </div>
+    <div class="form-button">
+      <button>Create account</button>
+    </div>
+    <% if (typeof(message) != "undefined") { %>
+      <div class="error"><p><%= message %></p></div>
+    <% } %>
+  </form>
+  <span>You already have an account? <a href="/auth/login">Log In</a></span>
+</div>

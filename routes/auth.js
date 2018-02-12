@@ -1,8 +1,11 @@
 'use strict';
 
 const express = require('express');
+const bcrypt = require('bcrypt');
 const router = express.Router();
+
 const User = require('../models/users');
+const bcryptSalt = 10;
 
 /* GET auth page. */
 router.get('/', (req, res, next) => {
@@ -45,7 +48,7 @@ router.post('/login', (req, res, next) => {
       };
       return res.render('auth/login', data);
     }
-    // compara les contrasenyes !! es aqui on entra !!
+    // compare passwords!! enters here !!
     if (bcrypt.compareSync(password, user.password)) {
       req.session.currentUser = user;
       res.redirect('/');
@@ -69,10 +72,22 @@ router.post('/signup', (req, res, next) => {
   const password = req.body.password;
   const role = req.body.role;
 
-  // Validate
-  if (username === '' || password === '' || password.length < 8 || !password.match(/[A-Z]/)) {
+  // Validation
+  if (name === '' || username === '' || password === '' || role === undefined) {
     const data = {
-      message: 'All fields are required. Password needs to be 8 characters long and at least one capitalized letter.'
+      message: 'All fields are required.'
+    };
+    return res.render('auth/signup', data);
+  }
+  if (password.length < 8) {
+    const data = {
+      message: 'Password needs to be 8 characters long.'
+    };
+    return res.render('auth/signup', data);
+  }
+  if (!password.match(/[A-Z]/)) {
+    const data = {
+      message: 'Password needs to include at least one capitalized letter.'
     };
     return res.render('auth/signup', data);
   }
@@ -84,7 +99,7 @@ router.post('/signup', (req, res, next) => {
     }
     if (user) {
       const data = {
-        message: 'The "' + username + '" username is taken'
+        message: '"' + username + '" username is taken'
       };
       return res.render('auth/signup', data);
     }
@@ -110,10 +125,6 @@ router.post('/signup', (req, res, next) => {
 router.get('/login', (req, res, next) => {
   res.render('auth/login');
 });
-
-// BCrypt to encrypt passwords
-const bcrypt = require('bcrypt');
-const bcryptSalt = 10;
 
 /* handle the POST from the login form. */
 router.post('/login', (req, res, next) => {
