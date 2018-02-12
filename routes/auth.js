@@ -1,19 +1,65 @@
 'use strict';
 
 const express = require('express');
-const routes = express.Router();
+const router = express.Router();
 const User = require('../models/users');
 
+/* GET auth page. */
+router.get('/', (req, res, next) => {
+  res.redirect('/');
+});
+
+/* GET log in. */
+router.get('/login', (req, res, next) => {
+  if (req.session.currentUser) {
+    return res.redirect('/');
+  }
+  res.render('auth/login');
+});
+
 // GET SignUp
-routes.get('/signup', (req, res, next) => {
+router.get('/signup', (req, res, next) => {
   if (req.session.currentUser) {
     return res.redirect('/');
   }
   res.render('auth/signup');
 });
 
+/* POST log in. */
+router.post('/login', (req, res, next) => {
+  if (req.session.currentUser) {
+    return res.redirect('/');
+  }
+
+  const username = req.body.username;
+  const password = req.body.password;
+
+  User.findOne({ 'username': username }, (err, user) => {
+    if (err) {
+      return next(err);
+    }
+    // validation
+    if (!user) {
+      const data = {
+        message: 'Username or password are incorrect'
+      };
+      return res.render('auth/login', data);
+    }
+    // compara les contrasenyes !! es aqui on entra !!
+    if (bcrypt.compareSync(password, user.password)) {
+      req.session.currentUser = user;
+      res.redirect('/');
+    } else {
+      const data = {
+        message: 'Username or password are incorrect'
+      };
+      res.render('auth/login', data);
+    }
+  });
+});
+
 // POST SignUp
-routes.post('/signup', (req, res, next) => {
+router.post('/signup', (req, res, next) => {
   if (req.session.User) {
     res.redirect('/');
   }
@@ -21,6 +67,7 @@ routes.post('/signup', (req, res, next) => {
   const name = req.body.name;
   const username = req.body.username;
   const password = req.body.password;
+  const role = req.body.role;
 
   // Validate
   if (username === '' || password === '' || password.length < 8 || !password.match(/[A-Z]/)) {
@@ -47,7 +94,8 @@ routes.post('/signup', (req, res, next) => {
     const newUser = new User({
       name,
       username,
-      password: hashPass
+      password: hashPass,
+      role
     });
 
     newUser.save()
@@ -59,7 +107,7 @@ routes.post('/signup', (req, res, next) => {
   });
 });
 
-routes.get('/login', (req, res, next) => {
+router.get('/login', (req, res, next) => {
   res.render('auth/login');
 });
 
@@ -68,7 +116,7 @@ const bcrypt = require('bcrypt');
 const bcryptSalt = 10;
 
 /* handle the POST from the login form. */
-routes.post('/login', (req, res, next) => {
+router.post('/login', (req, res, next) => {
   if (req.session.currentUser) {
     return res.redirect('/');
   }
@@ -109,9 +157,9 @@ routes.post('/login', (req, res, next) => {
   });
 });
 
-routes.post('/logout', (req, res, next) => {
+router.post('/logout', (req, res, next) => {
   req.session.currentUser = null;
   res.redirect('/');
 });
 
-module.exports = routes;
+module.exports = router;
