@@ -8,7 +8,10 @@ const Jobs = require('../models/jobs');
 // -- Get jobs page
 
 router.get('/', (req, res, next) => {
-  res.redirect('/');
+  // if current user is student
+  res.render('jobs/index');
+  // if current user is employer
+  // res.redirect('my-jobs')
 });
 
 // -- Get create jobs
