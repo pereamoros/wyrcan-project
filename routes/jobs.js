@@ -2,20 +2,24 @@
 
 const express = require('express');
 const router = express.Router();
-const User = require('../models/users');
-const Jobs = require('../models/jobs');
+// const User = require('../models/users');
+const Job = require('../models/jobs');
 
-// -- Get jobs page
-
+/* GET jobs */
 router.get('/', (req, res, next) => {
-  // if current user is student
-  res.render('jobs/index');
-  // if current user is employer
-  // res.redirect('my-jobs')
+  if (req.session.currentUser.role === 'employer') {
+    return res.redirect('my-jobs');
+  }
+  Job.find()
+    .then((jobs) => {
+      res.render('jobs/index', {jobs});
+    })
+    .catch(err => {
+      return next(err);
+    });
 });
 
-// -- Get create jobs
-
+/* GET create jobs */
 router.get('/create-job', (req, res, next) => {
   res.render('jobs/create-job');
 });
@@ -30,7 +34,7 @@ router.post('/create-job', (req, res, next) => {
     };
     return res.render('jobs/create-job', data);
   }
-  const newJob = new Jobs({
+  const newJob = new Job({
     position,
     description,
     owner: req.session.currentUser._id

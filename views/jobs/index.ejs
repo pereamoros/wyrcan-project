@@ -1,2 +1,18 @@
-<h1>Jobs list</h1>
-<p>You entered as a student</p>
+<div class="container">
+  <h1>Jobs list</h1>
+  <p>You entered as a student</p>
+  <div class="job-list">
+    <% jobs.forEach((job) => { %>
+      <div class="job-item">
+        <div class="job-position">
+          <%= job.position %>
+        </div>
+        <div class="job-description">
+          <%= job.description %>
+        </div>
+      </div>
+    <% }) %>
+    
+  </div>
+
+</div>
