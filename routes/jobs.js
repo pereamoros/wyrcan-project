@@ -51,7 +51,8 @@ router.post('/create-job', (req, res, next) => {
     position,
     description,
     owner: req.session.currentUser._id,
-    archive: false
+    archive: false,
+    successCandidate: null
   });
 
   newJob.save()
@@ -71,10 +72,11 @@ router.get('/:id', (req, res, next) => {
     return res.redirect('/jobs/' + id + '/apply');
   }
   const jobId = req.params.id;
+
   Job.findById(jobId)
     .populate('applications.user')
+    .populate('successCandidate')
     .then((job) => {
-      console.log(job.applications[0].user.name);
       res.render('jobs/job-id', {job});
     })
     .catch(next);
@@ -142,6 +144,28 @@ router.post('/:id', (req, res, next) => {
   Job.update({_id: jobId}, updates)
     .then((job) => {
       res.redirect('/jobs');
+    })
+    .catch(next);
+});
+
+router.post('/:idjob/:iduser/approve', (req, res, next) => {
+  if (!req.session.currentUser) {
+    return res.redirect('/');
+  }
+  if (req.session.currentUser.role !== 'employer') {
+    return res.redirect('/jobs');
+  }
+
+  const applicant = req.params.iduser;
+  const jobId = req.params.idjob;
+  const updates = {
+    $set: {
+      successCandidate: applicant
+    }
+  };
+  Job.update({_id: jobId}, updates)
+    .then((job) => {
+      res.redirect('/my-jobs');
     })
     .catch(next);
 });

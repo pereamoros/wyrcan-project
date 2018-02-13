@@ -18,7 +18,11 @@ const jobSchema = new Schema({
       ref: 'User'
     },
     text: String
-  }]
+  }],
+  successCandidate: {
+    type: ObjectId,
+    ref: 'User'
+  }
 });
 
 const Job = mongoose.model('Job', jobSchema);

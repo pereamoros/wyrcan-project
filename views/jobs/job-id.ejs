@@ -17,6 +17,16 @@
     <% job.applications.forEach((applicant) => { %>
     <p>Applicant: <%= applicant.user.name %></p>
     <p>Message: <%= applicant.text %></p>
+    <div class='accept-btn'>
+        <form method="POST" action="/jobs/<%= job._id%>/<%= applicant.user._id%>/approve">
+            <button>Accept</button>
+        </form>
+    </div>
+    <% if(job.successCandidate.id === applicant.user.id){ %>
+    <div class="whatever">
+        Accepeted One
+    </div>
+    <% } %>
     <% }) %>
 </div>
 <span>Back to <a href="/my-jobs">My Jobs</a></span>
