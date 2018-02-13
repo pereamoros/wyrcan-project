@@ -1,5 +1,5 @@
 <div class="signup-wrapper">
-<h1>Sign Up</h1>
+  <h2>Sign Up</h2>
   <form class="signup-form" action="/auth/signup" method="POST">
     <div class="form-input">
         <label for="name">Name:</label>
@@ -13,19 +13,24 @@
       <label for="password">Password:</label>
       <input type="password" name="password" id="password" placeholder="Password">
     </div>
-    <div class="signup-radio">
-      <label class="label-role student" for="role">Student</label>
-      <input type="radio" name="role" value="student" id="role" />
-      <label class="label-role employer" for="role">Employer</label>
-      <input type="radio" name="role" value="employer" id="role" />
+    <div class="form-button signup-radio">
+      <div class="signup-input">
+        <input type="radio" name="role" id="role-student" value="student" />
+        <label class="label-role" for="role-student">Student</label>
+      </div>
+      <div class="signup-input">
+        <input type="radio" name="role" id="role-employer" value="employer" />
+        <label class="label-role" for="role-employer">Employer</label>
+      </div>
     </div>
+    <% if (typeof(message) != "undefined") { %>
+      <div class="form-input error"><p><%= message %></p></div>
+    <% } %>
     <div class="form-button">
       <button>Create account</button>
     </div>
-    <% if (typeof(message) != "undefined") { %>
-      <div class="error"><p><%= message %></p></div>
-    <% } %>
   </form>
-  <span>You already have an account? <a href="/auth/login">Log In</a></span><br>
-  <span>Back to <a href="/">homepage</a></span>
+  <div>
+    <span>You already have an account? <a href="/auth/login">Log In</a></span>
+  </div>
 </div>

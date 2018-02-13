@@ -8,14 +8,18 @@
   </head>
   <body>
     <div class="main-wrapper">
-      <header>
+      <header class="header-wrapper">
         <div class="header-logo">
-          <img src="/images/lorem-logo.png" alt="Wyrcan Logo" />
+          <a href="/">
+            <img src="/images/lorem-logo.png" alt="Wyrcan Logo" />
+          </a>
         </div>
         <% if(user) { %>
-        <form action="/auth/logout" method="POST">
-          <button>Log out</button>
-        </form>
+        <div class="header-logout">
+          <form action="/auth/logout" method="POST">
+            <button>Log out</button>
+          </form>
+        </div>
         <% } %>
       </header>
       <div class="content-wrapper">
