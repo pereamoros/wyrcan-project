@@ -1,26 +1,67 @@
+/* -- RESET -- */
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+/* -- TYPOGRAPHY -- */
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
-
 a {
   color: #00B7FF;
 }
-
+/* -- LAYOUT -- */
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  margin: 0;
+}
+.main-wrapper{
   max-width: 960px;
   margin: 0 auto;
 }
-
-a {
-  color: #00B7FF;
+header{
+  padding: 10px 20px;
+  background: #1371A7;
+}
+footer{
+  background: #444;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+.content-wrapper{
+  padding: 20px;
 }
 .container {
   padding: 20px;
   background: #f2f4ff;
 }
+
+/* -- COMPONENTS -- */
+.header-logo img{
+  width: 50px;
+}
+.footer-name{
+  font-weight: bold;
+}
+.home-content{
+  text-align: center;
+}
+.home-auth a{
+  text-decoration: none;
+  color: #fff; 
+}
+.home-signup, .home-login{
+  padding: 15px;
+  width: 80%;
+  margin: 0 10%;
+  border-radius: 2px;
+  margin-bottom: 10px;
+  /* color: #fff; */
+}
+.home-signup{background: #35b535}
+.home-login{background: #00B7FF}
 .login-wrapper, .signup-wrapper{
   color: #444;
   margin-bottom: 20px;

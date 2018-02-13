@@ -22,10 +22,12 @@
             <button>Accept</button>
         </form>
     </div>
-    <% if(job.successCandidate.id === applicant.user.id){ %>
-    <div class="whatever">
-        Candidate accepted
-    </div>
+    <% if (job.successCandidate !== null){ %>
+        <% if(job.successCandidate.id === applicant.user.id){ %>
+        <div class="whatever">
+            Candidate accepted
+        </div>
+        <% } %>
     <% } %>
     <% }) %>
 </div>
