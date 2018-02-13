@@ -13,12 +13,13 @@
   
   <h2><ul>
     <% jobs.forEach((job) => { %>
-        <a href='/jobs/<%= job._id%>'>
+        <a href='/jobs/<%= job._id%>'> 
       <li>
          Job Position: <%= job.position %>  
          Job Description: <%= job.description %> 
          Job Status : <%= job.archive %>
       </li>
+      View details
         </a>
     <% }) %>
   </ul></h2>  

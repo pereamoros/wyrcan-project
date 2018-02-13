@@ -82,6 +82,49 @@ router.get('/:id', (req, res, next) => {
     .catch(next);
 });
 
+// -- * Edit Job * -- //
+
+router.get('/:id/edit', (req, res, next) => {
+  if (!req.session.currentUser) {
+    return res.redirect('/');
+  }
+  if (req.session.currentUser.role !== 'employer') {
+    return res.redirect('/jobs');
+  }
+  const jobId = req.params.id;
+  Job.findById(jobId)
+    .then((job) => {
+      console.log(job);
+      res.render('jobs/edit-job', {job});
+    })
+    .catch(next);
+});
+
+router.post('/:id/edit', (req, res, next) => {
+  if (!req.session.currentUser) {
+    return res.redirect('/');
+  }
+  if (req.session.currentUser.role !== 'employer') {
+    return res.redirect('/jobs');
+  }
+  const jobId = req.params.id;
+  const position = req.body.position;
+  const description = req.body.description;
+
+  const updateJob = {
+    $set: {
+      position,
+      description
+    }
+  };
+
+  Job.update({_id: jobId}, updateJob)
+    .then((job) => {
+      res.redirect('/my-jobs');
+    })
+    .catch(next);
+});
+
 /* GET job apply */
 router.get('/:id/apply', (req, res, next) => {
   if (!req.session.currentUser) {
