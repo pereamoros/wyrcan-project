@@ -2,15 +2,17 @@
 
 const express = require('express');
 const router = express.Router();
-// const User = require('../models/users');
 const Job = require('../models/jobs');
 
 /* GET jobs */
 router.get('/', (req, res, next) => {
-  if (req.session.currentUser.role === 'employer') {
-    return res.redirect('my-jobs');
+  if (!req.session.currentUser) {
+    return res.redirect('/');
   }
-  Job.find()
+  if (req.session.currentUser.role !== 'student') {
+    return res.redirect('/my-jobs');
+  }
+  Job.find({archive: false})
     .then((jobs) => {
       res.render('jobs/index', {jobs});
     })
@@ -19,11 +21,23 @@ router.get('/', (req, res, next) => {
 
 /* GET create jobs */
 router.get('/create-job', (req, res, next) => {
+  if (!req.session.currentUser) {
+    return res.redirect('/');
+  }
+  if (req.session.currentUser.role !== 'employer') {
+    return res.redirect('/jobs');
+  }
   res.render('jobs/create-job');
 });
 
 /* POST create jobs */
 router.post('/create-job', (req, res, next) => {
+  if (!req.session.currentUser) {
+    return res.redirect('/');
+  }
+  if (req.session.currentUser.role !== 'employer') {
+    return res.redirect('/jobs');
+  }
   const position = req.body.position;
   const description = req.body.description;
 
@@ -49,13 +63,18 @@ router.post('/create-job', (req, res, next) => {
 
 /* GET job id */
 router.get('/:id', (req, res, next) => {
-  if (req.session.currentUser.role === 'student') {
+  if (!req.session.currentUser) {
+    return res.redirect('/');
+  }
+  if (req.session.currentUser.role !== 'employer') {
     const id = req.params.id;
-    res.redirect('/jobs/' + id + '/apply');
+    return res.redirect('/jobs/' + id + '/apply');
   }
   const jobId = req.params.id;
   Job.findById(jobId)
+    .populate('applications.user')
     .then((job) => {
+      console.log(job.applications[0].user.name);
       res.render('jobs/job-id', {job});
     })
     .catch(next);
@@ -63,12 +82,16 @@ router.get('/:id', (req, res, next) => {
 
 /* GET job apply */
 router.get('/:id/apply', (req, res, next) => {
-  if (req.session.currentUser.role === 'employer') {
+  if (!req.session.currentUser) {
+    return res.redirect('/');
+  }
+  if (req.session.currentUser.role !== 'student') {
     const id = req.params.id;
-    res.redirect('/jobs/' + id);
+    return res.redirect('/jobs/' + id);
   }
   const jobId = req.params.id;
   Job.findById(jobId)
+    .populate('owner')
     .then((job) => {
       res.render('jobs/job-apply', {job});
     })
@@ -77,7 +100,13 @@ router.get('/:id/apply', (req, res, next) => {
 
 /* POST job apply */
 router.post('/:id/apply', (req, res, next) => {
-  const applicant = req.session.currentUser.name;
+  if (!req.session.currentUser) {
+    return res.redirect('/');
+  }
+  if (req.session.currentUser.role !== 'student') {
+    return res.redirect('/my-jobs');
+  }
+  const applicant = req.session.currentUser._id;
   const applicationText = req.body.application;
   const jobId = req.params.id;
   const updates = {
@@ -97,6 +126,12 @@ router.post('/:id/apply', (req, res, next) => {
 });
 
 router.post('/:id', (req, res, next) => {
+  if (!req.session.currentUser) {
+    return res.redirect('/');
+  }
+  if (req.session.currentUser.role !== 'employer') {
+    return res.redirect('/jobs');
+  }
   const jobId = req.params.id;
 
   const updates = {

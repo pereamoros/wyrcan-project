@@ -15,8 +15,8 @@
 <div class='applicants'>
     <h2>Applicants</h2>
     <% job.applications.forEach((applicant) => { %>
-    <p>Applicant: <%= applicant.user%></p>
-    <p>Message: <%= applicant.text%></p>
+    <p>Applicant: <%= applicant.user.name %></p>
+    <p>Message: <%= applicant.text %></p>
     <% }) %>
 </div>
 <span>Back to <a href="/my-jobs">My Jobs</a></span>

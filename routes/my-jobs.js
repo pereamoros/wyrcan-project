@@ -4,8 +4,11 @@ const Job = require('../models/jobs');
 
 /* GET my-jobs page. */
 router.get('/', (req, res, next) => {
-  if (req.session.currentUser.role === 'student') {
-    res.redirect('jobs');
+  if (!req.session.currentUser) {
+    return res.redirect('/');
+  }
+  if (req.session.currentUser.role !== 'employer') {
+    return res.redirect('/jobs');
   }
   Job.find({owner: req.session.currentUser._id})
     .then((jobs) => {
@@ -15,6 +18,12 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
+  if (!req.session.currentUser) {
+    return res.redirect('/');
+  }
+  if (req.session.currentUser.role !== 'employer') {
+    return res.redirect('/jobs');
+  }
   res.redirect('/jobs/create-job');
 });
 

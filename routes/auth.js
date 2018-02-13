@@ -73,8 +73,8 @@ router.get('/signup', (req, res, next) => {
 
 /* POST SignUp */
 router.post('/signup', (req, res, next) => {
-  if (req.session.User) {
-    res.redirect('/');
+  if (req.session.currentUser) {
+    return res.redirect('/');
   }
 
   const name = req.body.name;
@@ -138,6 +138,9 @@ router.post('/signup', (req, res, next) => {
 
 /* POST LogOut */
 router.post('/logout', (req, res, next) => {
+  if (!req.session.currentUser) {
+    return res.redirect('/');
+  }
   req.session.currentUser = null;
   res.redirect('/');
 });
