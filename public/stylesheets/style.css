@@ -11,7 +11,7 @@ button {
   padding: 10px 15px;
   cursor: pointer;
 }
-input::placeholder{
+input::placeholder, textarea::placeholder{
   color: #ddd;
 }
 /* -- TYPOGRAPHY -- */
@@ -20,6 +20,9 @@ body {
 }
 a {
   color: #00B7FF;
+}
+.content-wrapper{
+  color: #444;
 }
 /* -- LAYOUT -- */
 body {
@@ -53,6 +56,9 @@ button{
   color: #1371A7;
   box-shadow: 0px 3px 0px #CFCDCB;
   background: #ddd;
+  font-weight: bold;
+}
+.bold{
   font-weight: bold;
 }
   /* HEADER */
@@ -100,7 +106,7 @@ button{
   margin-bottom: 20px;
 }
   /* FORMS */
-.form-input, .form-button {
+.form-input, .form-button, .form-textarea {
   margin-bottom: 15px;
 }
 .form-input label{
@@ -128,6 +134,41 @@ button{
   font-size: 12px;
   text-align: center;
 }
+.form-textarea textarea {
+  outline: none;
+  resize: none;
+  width: 100%;
+  border: 1px solid #ddd;
+  margin: 0;
+  padding: 5px;
+}
+  /* JOBS LIST (student view) */
+.job-list a {
+  text-decoration: none;
+  color: #444;
+}
+.job-item {
+  background: rgba(0, 183, 255 , 0.3);
+  margin-bottom: 10px;
+  padding: 15px;
+  border-radius: 2px;
+}
+.job-position h2 {
+  margin-top: 0px;
+}
+.job-description p {
+  margin: 0;
+  font-size: 12px;
+}
+  /* JOB APPLY */
+.apply-description, .apply-form{
+  margin-bottom: 25px;
+}
+
+
+
+
+
   /* -- RadioCheckBox  -- */
 .signup-radio{
   display: flex;
