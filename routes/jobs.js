@@ -208,7 +208,7 @@ router.post('/:idjob/:iduser/approve', (req, res, next) => {
   };
   Job.update({_id: jobId}, updates)
     .then((job) => {
-      res.redirect('/my-jobs');
+      res.redirect('/jobs/' + jobId);
     })
     .catch(next);
 });
