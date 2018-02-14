@@ -1,22 +1,24 @@
-<h1>My Jobs</h1>
-<p>You entered as an employer</p>
-
-<header>
-    <% if(user) { %>
+<h1>Wyrcan - My Jobs</h1>
+<p>Welcome <%= user.name %>!</p>
+<div class="myjobs-nav">
+  <div>
     <form action="/my-jobs" method="POST">
       <button>Create a job</button>
     </form>
-    <% } %>
-  </header>
-<a href = '/my-jobs/archive'>Archives</a>
-  <h2><ul>
-    <% jobs.forEach((job) => { %>
-        <a href='/jobs/<%= job._id%>'> 
-      <li>
-         Job Position: <%= job.position %>  
-         Job Description: <%= job.description %> 
-      </li>
-      View details
-        </a>
-    <% }) %>
-  </ul></h2>  
+  </div>
+  <a href = '/my-jobs/archive'>Archives</a>
+</div>
+<div class="myjobs-list">
+  <% jobs.forEach((job) => { %>
+    <a href='/jobs/<%= job._id%>'> 
+      <div class="myjobs-item">
+        <div class="myjobs-position">
+          <h2><%= job.position %></h2>
+        </div>
+        <div class="myjobs-decription">
+          <p><%= job.description %></p>
+        </div>
+      </div>
+    </a>
+  <% }) %>  
+</div>
