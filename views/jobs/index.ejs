@@ -1,19 +1,17 @@
-<div class="container">
-  <h1>Jobs list</h1>
-  <p>You entered as a student</p>
-  <div class="job-list">
-    <% jobs.forEach((job) => { %>
-      <a href='/jobs/<%= job._id%>/apply'>
-        <div class="job-item">
-          <div class="job-position">
-            <%= job.position %>
-          </div>
-        <div class="job-description">
-            <%= job.description %>
-        </div>    
-        </div>
-      </a>
-    <% }) %>
-  </div>
+<h1>Wyrcan - Job Offers</h1>
+<p>Welcome <%= user.name %>!</p>
+<div class="job-list">
+<% jobs.forEach((job) => { %>
+  <a href='/jobs/<%= job._id%>/apply'>
+    <div class="job-item">
+      <div class="job-position">
+        <h2><%= job.position %></h2>
+      </div>
+    <div class="job-description">
+        <p><%= job.description %></p>
+    </div>    
+    </div>
+  </a>
+<% }) %>
 </div>
 
