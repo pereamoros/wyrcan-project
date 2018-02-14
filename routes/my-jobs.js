@@ -10,11 +10,11 @@ router.get('/', (req, res, next) => {
   if (req.session.currentUser.role !== 'employer') {
     return res.redirect('/jobs');
   }
-  Job.find({owner: req.session.currentUser._id})
+  Job.find({$and: [{owner: req.session.currentUser._id}, {archive: false}]})
     .then((jobs) => {
       res.render('my-jobs/index', {jobs});
     })
-    .catch();
+    .catch(next);
 });
 
 router.post('/', (req, res, next) => {
