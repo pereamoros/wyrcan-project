@@ -128,7 +128,7 @@ button{
   font-size: 12px;
   text-align: center;
 }
-/* -- RadioCheckBox  -- */
+  /* -- RadioCheckBox  -- */
 .signup-radio{
   display: flex;
   justify-content: space-around;
