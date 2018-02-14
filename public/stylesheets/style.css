@@ -9,6 +9,7 @@ button {
   border: 0px;
   border-radius: 2px;
   padding: 10px 15px;
+  cursor: pointer;
 }
 input::placeholder{
   color: #ddd;
@@ -48,6 +49,13 @@ footer{
 }
 
 /* -- COMPONENTS -- */
+button{
+  color: #1371A7;
+  box-shadow: 0px 3px 0px #CFCDCB;
+  background: #ddd;
+  font-weight: bold;
+}
+  /* HEADER */
 .header-wrapper{
   display: flex;
   align-items: center;
@@ -56,30 +64,42 @@ footer{
 .header-logo img{
   width: 50px;
 }
+  /* FOOTER */
 .footer-name{
   font-weight: bold;
 }
+  /* HOME */
 .home-content{
   text-align: center;
 }
-.home-auth a{
+.btn-home-signup,.btn-home-login {
   text-decoration: none;
+  font-weight: bold;
   color: #fff; 
+  display: block;
+  width: 80%;
+  margin: 0 auto;
+  border-radius: 2px;
+}
+.btn-home-signup, .btn-signup{
+  background: #35b535;
+  box-shadow: 0px 3px 0px #248224;
+}
+.btn-home-login, .btn-login{
+  background: #00B7FF;
+  box-shadow: 0px 3px 0px #1371A7;
 }
 .home-signup, .home-login{
   padding: 15px;
-  width: 80%;
-  margin: 0 10%;
   border-radius: 2px;
   margin-bottom: 10px;
-  /* color: #fff; */
 }
-.home-signup{background: #35b535}
-.home-login{background: #00B7FF}
+  /* LOGIN - SIFNUP  */
 .login-wrapper, .signup-wrapper{
   color: #444;
   margin-bottom: 20px;
 }
+  /* FORMS */
 .form-input, .form-button {
   margin-bottom: 15px;
 }
@@ -97,12 +117,11 @@ footer{
 }
 .form-button button{
   width: 100%;
-  padding: 10px 5px;
+  padding: 15px 5px;
   font-size: 14px;
-  background: #35b535;
   color: #fff;
-  border-radius: 2px;
-  border: none;
+  /* background: #35b535;
+  box-shadow: 0px 3px 0px #248224; */
 }
 .error{
   color: red;
@@ -119,14 +138,16 @@ footer{
 }
 .signup-input input{
   position: absolute;
-  top: 2px;
-  left: 2px;
+  top: 3px;
+  left: 4px;
+  z-index: 9999;
 }
 .signup-input label{
   display: inline-block;
   padding: 20px;
   cursor:pointer;
-  border-radius:2px;
+  border-radius: 5px;
+  border-top-left-radius: 15px;
   background: #4B8FB6;
   color: #fff;
 }
@@ -137,4 +158,10 @@ footer{
   -webkit-filter: brightness(1.1) grayscale(0) opacity(1);
      -moz-filter: brightness(1.1) grayscale(0) opacity(1);
           filter: brightness(1.1) grayscale(0) opacity(1);
+}
+/* -- Active --*/
+button:active, .btn-home-signup:active,.btn-home-login:active { 
+  box-shadow: none;
+  position: relative;
+  top: 3px;
 }
