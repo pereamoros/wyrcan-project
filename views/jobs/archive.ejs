@@ -5,6 +5,9 @@
       <li>
          Job Position: <%= job.position %>  
          Job Description: <%= job.description %> 
+         <form action="/my-jobs/<%= job._id%>/unarchive" method="POST">
+            <button>Unarchive</button>
+          </form>
       </li>
         </a>
     <% }) %>
