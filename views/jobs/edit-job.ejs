@@ -3,12 +3,16 @@
         <form method="post" action="/jobs/<%= job._id%>/edit">
           <div class="form-input">
             <label for="position">Job Position:</label>
-            <input type="text" name="position" id="position"/>
+            <input type="text" name="position" id="position" value='<%= job.position%>'/>
           </div>
           <div class="form-input">
             <label for="description">Job description:</label>
-            <input type="description" name="description" id="description"/>
+            <input type="text" name="description" id="description" value='<%= job.description%>'/>
           </div>
+          <div class="form-input">
+              <label for="salary">Job Salary:</label>
+              <input type="text" name="salary" id="salary" value='<%= job.salary%>'/>
+            </div>
           <% if (typeof message !== 'undefined') { %>
             <p class="error"><%= message %></p>
           <% } %>

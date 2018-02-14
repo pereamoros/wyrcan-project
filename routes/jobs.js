@@ -40,6 +40,7 @@ router.post('/create-job', (req, res, next) => {
   }
   const position = req.body.position;
   const description = req.body.description;
+  const salary = req.body.salary;
 
   if (position === '' || description === '') {
     const data = {
@@ -50,6 +51,7 @@ router.post('/create-job', (req, res, next) => {
   const newJob = new Job({
     position,
     description,
+    salary,
     owner: req.session.currentUser._id,
     archive: false,
     successCandidate: null
@@ -110,17 +112,19 @@ router.post('/:id/edit', (req, res, next) => {
   const jobId = req.params.id;
   const position = req.body.position;
   const description = req.body.description;
+  const salary = req.body.salary;
 
   const updateJob = {
     $set: {
       position,
-      description
+      description,
+      salary
     }
   };
 
   Job.update({_id: jobId}, updateJob)
     .then((job) => {
-      res.redirect('/my-jobs');
+      res.redirect('/jobs/' + jobId);
     })
     .catch(next);
 });

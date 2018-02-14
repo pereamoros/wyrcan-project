@@ -7,6 +7,7 @@ const ObjectId = mongoose.Schema.Types.ObjectId;
 const jobSchema = new Schema({
   position: String,
   description: String,
+  salary: String,
   owner: {
     type: ObjectId,
     ref: 'User'

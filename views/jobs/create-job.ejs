@@ -7,8 +7,12 @@
       </div>
       <div class="form-input">
         <label for="description">Job description:</label>
-        <input type="description" name="description" id="description"/>
+        <input type="text" name="description" id="description"/>
       </div>
+      <div class="form-input">
+          <label for="description">Job Salary:</label>
+          <input type="text" name="salary" id="salary"/>
+        </div>
       <% if (typeof message !== 'undefined') { %>
         <p class="error"><%= message %></p>
       <% } %>
