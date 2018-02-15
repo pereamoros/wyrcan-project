@@ -3,6 +3,7 @@
 const express = require('express');
 const router = express.Router();
 const Job = require('../models/jobs');
+const mongoose = require('mongoose');
 
 /* GET jobs */
 router.get('/', (req, res, next) => {
@@ -74,11 +75,16 @@ router.get('/:id', (req, res, next) => {
     return res.redirect('/jobs/' + id + '/apply');
   }
   const jobId = req.params.id;
-
+  if (!mongoose.Types.ObjectId.isValid(jobId)) {
+    return res.status(404).render('not-found');
+  }
   Job.findById(jobId)
     .populate('applications.user')
     .populate('successCandidate')
     .then((job) => {
+      if (!job) {
+        return res.status(404).render('not-found');
+      }
       res.render('jobs/job-id', {job});
     })
     .catch(next);
@@ -94,9 +100,14 @@ router.get('/:id/edit', (req, res, next) => {
     return res.redirect('/jobs');
   }
   const jobId = req.params.id;
+  if (!mongoose.Types.ObjectId.isValid(jobId)) {
+    return res.status(404).render('not-found');
+  }
   Job.findById(jobId)
     .then((job) => {
-      console.log(job);
+      if (!job) {
+        return res.status(404).render('not-found');
+      }
       res.render('jobs/edit-job', {job});
     })
     .catch(next);
@@ -139,9 +150,15 @@ router.get('/:id/apply', (req, res, next) => {
     return res.redirect('/jobs/' + id);
   }
   const jobId = req.params.id;
+  if (!mongoose.Types.ObjectId.isValid(jobId)) {
+    return res.status(404).render('not-found');
+  }
   Job.findById(jobId)
     .populate('owner')
     .then((job) => {
+      if (!job) {
+        return res.status(404).render('not-found');
+      }
       res.render('jobs/job-apply', {job});
     })
     .catch(next);
