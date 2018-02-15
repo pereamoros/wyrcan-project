@@ -1,40 +1,50 @@
-<div class='job-details'>
+<div class="myjobs-nav">
     <div class='archive-btn'>
         <form method="POST" action="/jobs/<%= job._id%>">
             <button>Archive</button>
         </form>
     </div>
-     <div class='edit-btn'>
-            <a href ='/jobs/<%= job._id%>/edit/'>Edit job</a>
-        </div>
-    <h1>Job Details</h1>
+    <div class='nav-route'>
+        <a href="/my-jobs">My Jobs</a> |
+        <a href ='/jobs/<%= job._id%>/edit/'>Edit job</a>
+    </div>
+</div>
+<div class='job-details'>
     <div class='job-position'>
-        <%= job.position %>
+        <h1><%= job.position %></h1>
     </div>
     <div class='job-description'>
-        <%= job.description %>
+        <p><%= job.description %></p>
     </div>
     <div class='job-salary'>
-            <%= job.salary %>
-        </div>
+        <p><span class="bold">Salary: </span><%= job.salary %></p>
+    </div>
 </div>
-<div class='applicants'>
+<div class='applicants-list'>
     <h2>Applicants</h2>
     <% job.applications.forEach((applicant) => { %>
-    <p>Applicant: <%= applicant.user.name %></p>
-    <p>Message: <%= applicant.text %></p>
-    <div class='accept-btn'>
-        <form method="POST" action="/jobs/<%= job._id%>/<%= applicant.user._id%>/approve">
-            <button>Accept</button>
-        </form>
-    </div>
-    <% if (job.successCandidate !== null){ %>
-        <% if(job.successCandidate.id === applicant.user.id){ %>
-        <div class="whatever">
-            Candidate accepted
+        <div class="applicants-item">
+            <div class="applicants-name">
+                <p><span class="bold">Applicant:</span> <%= applicant.user.name %></p>
+            </div>
+            <div class="applicants-message">
+                <p><span class="bold">Message:</span> <%= applicant.text %></p>
+            </div>
+            <div class='accept-btn'>
+                <form method="POST" action="/jobs/<%= job._id%>/<%= applicant.user._id%>/approve">
+                    <button class="btn-signup">Accept</button>
+                    <% if (job.successCandidate !== null){ %>
+                        <% if(job.successCandidate.id === applicant.user.id){ %>
+                        <span class="success">Candidate accepted</span>
+                        <% } %>
+                    <% } %>
+                </form>
+            </div>
         </div>
-        <% } %>
-    <% } %>
     <% }) %>
+    <% if(job.applications.length === 0) {%>
+    <div class="applicants-item">
+        <span>Nobody has applied yet.</span>
+    </div>
+    <% } %>
 </div>
-<span>Back to <a href="/my-jobs">My Jobs</a></span>

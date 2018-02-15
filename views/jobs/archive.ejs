@@ -1,15 +1,25 @@
+<div class="myjobs-nav">
+  <div></div>
+  <div class='nav-route'>
+      <a href="/my-jobs">My Jobs</a>
+  </div>
+</div>
 <h1>Archived Jobs</h1>
-
-<h2><ul>
-    <% jobs.forEach((job) => { %>
-      <li>
-         Job Position: <%= job.position %>  
-         Job Description: <%= job.description %> 
-         <form action="/my-jobs/<%= job._id%>/unarchive" method="POST">
-            <button>Unarchive</button>
-          </form>
-      </li>
-        </a>
-    <% }) %>
-  </ul></h2>  
-  <span>Back to <a href="/my-jobs">My Jobs</a></span>
+<% jobs.forEach((job) => { %>
+  <div class="job-item">
+    <div class="job-position">
+      <h2><%= job.position %></h2>
+    </div>
+    <form action="/my-jobs/<%= job._id%>/unarchive" method="POST">
+      <button>Unarchive</button>
+    </form>
+  </div>
+<% }) %>
+<% if(jobs.length === 0) {%>
+  <div class="job-item">
+      <div class="job-description">
+        There are no jobs archived.
+      </div>
+    </div>
+<% } %>
+<span>Back to <a href="/my-jobs">My Jobs</a></span>

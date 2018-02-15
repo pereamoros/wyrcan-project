@@ -1,3 +1,9 @@
+<div class="myjobs-nav">
+  <div></div>
+  <div class='nav-route'>
+      <a href="/my-jobs">My Jobs</a>
+  </div>
+</div>
 <div class="create-job-wrapper">
     <h2>Create job</h2>
     <form method="post" action="/jobs/create-job">
@@ -17,8 +23,7 @@
         <p class="error"><%= message %></p>
       <% } %>
       <div class="form-button">
-        <button>Create</button>
+        <button class="btn-create">Create</button>
       </div>
     </form>
   </div>
-  <span>Back to <a href="/my-jobs">My Jobs</a></span>

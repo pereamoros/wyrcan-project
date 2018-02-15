@@ -136,7 +136,7 @@ router.post('/signup', (req, res, next) => {
 });
 
 /* POST LogOut */
-router.post('/logout', auth.requireNoUser, (req, res, next) => {
+router.post('/logout', auth.requireUser, (req, res, next) => {
   req.session.currentUser = null;
   res.redirect('/');
 });

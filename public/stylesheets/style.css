@@ -90,10 +90,12 @@ button{
 .btn-home-signup, .btn-signup{
   background: #35b535;
   box-shadow: 0px 3px 0px #248224;
+  color: #fff;
 }
-.btn-home-login, .btn-login{
+.btn-home-login, .btn-login, .btn-create, .btn-update{
   background: #00B7FF;
   box-shadow: 0px 3px 0px #1371A7;
+  color: #fff;
 }
 .home-signup, .home-login{
   padding: 15px;
@@ -134,6 +136,9 @@ button{
   font-size: 12px;
   text-align: center;
 }
+.success{
+  color: #248224;
+}
 .form-textarea textarea {
   outline: none;
   resize: none;
@@ -147,9 +152,9 @@ button{
   text-decoration: none;
   color: #444;
 }
-.job-item, .myjobs-item {
+.job-item, .myjobs-item, .applicants-item {
   background: rgba(0, 0, 0 , 0.02);
-  border: 1px solid #ddd;
+  border: 1px solid #444;
   box-shadow: 0 1px 2px rgba(0,0,0,.2);
   margin-bottom: 10px;
   padding: 15px;
@@ -157,10 +162,6 @@ button{
 }
 .job-position h2, .myjobs-position h2 {
   margin-top: 0px;
-}
-.job-description p, .myjobs-description h2 {
-  margin: 0;
-  font-size: 12px;
 }
   /* JOB APPLY */
 .apply-description, .apply-form{
@@ -170,13 +171,20 @@ button{
 .myjobs-nav {
   display: flex;
   justify-content: space-between;
-  margin: 20px 0px;
-  background: #eee;
-  padding: 20px 5px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #1371A7;
 }
-
-
-
+.myjobs-nav a{
+  line-height: 33px;
+}
+  /* MYJOBS ID (employer view)  */
+.applicants-item{
+  background: rgba(0, 83, 255 , 0.1);
+  border: 1px solid #1371A7;
+}
+.applicants-item p{
+  margin-top: 0px;
+}
 
   /* -- RadioCheckBox  -- */
 .signup-radio{
