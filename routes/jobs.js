@@ -141,6 +141,16 @@ router.post('/:id/edit', (req, res, next) => {
     .catch(next);
 });
 
+router.get('/applied', (req, res, next) => {
+  if (!req.session.currentUser) {
+    return res.redirect('/');
+  }
+  if (req.session.currentUser.role !== 'student') {
+    return res.redirect('/my-jobs');
+  }
+  res.render('jobs/applied');
+});
+
 /* GET job apply */
 router.get('/:id/apply', (req, res, next) => {
   if (!req.session.currentUser) {
@@ -190,6 +200,30 @@ router.post('/:id/apply', (req, res, next) => {
       res.redirect('/jobs');
     })
     .catch(next);
+
+  // let appId;
+
+  // Job.find(applications).forEach(application => {
+  //   if (application.user === req.session.currentUser._id) {
+  //     appId = application.id;
+  //     console.log(appId);
+  //   }
+  // });
+
+  // Job.findByIdAndUpdate(jobId)
+  //   .then((response) => {
+  //     Job.update({_id: jobId}, updates)
+  //       .then((job) => {
+  //         res.redirect('/jobs');
+  //       });
+  //   })
+  //   .then((response) => {
+  //     Job.update({_id: jobId}, updates)
+  //       .then((job) => {
+  //         res.redirect('/jobs');
+  //       });
+  //   })
+  //   .catch(next);
 });
 
 router.post('/:id', (req, res, next) => {
