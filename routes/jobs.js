@@ -4,6 +4,7 @@ const express = require('express');
 const router = express.Router();
 const Job = require('../models/jobs');
 const mongoose = require('mongoose');
+// const auth = require('../helpers/authorization');
 
 /* GET jobs */
 router.get('/', (req, res, next) => {

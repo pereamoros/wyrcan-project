@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 const router = express.Router();
 
 const User = require('../models/users');
+const auth = require('../helpers/authorization');
 const bcryptSalt = 10;
 
 /* GET auth page. */
@@ -25,7 +26,6 @@ router.post('/login', (req, res, next) => {
   if (req.session.currentUser) {
     return res.redirect('/');
   }
-
   const username = req.body.username;
   const password = req.body.password;
 
@@ -76,7 +76,6 @@ router.post('/signup', (req, res, next) => {
   if (req.session.currentUser) {
     return res.redirect('/');
   }
-
   const name = req.body.name;
   const username = req.body.username;
   const password = req.body.password;
@@ -137,10 +136,7 @@ router.post('/signup', (req, res, next) => {
 });
 
 /* POST LogOut */
-router.post('/logout', (req, res, next) => {
-  if (!req.session.currentUser) {
-    return res.redirect('/');
-  }
+router.post('/logout', auth.requireNoUser, (req, res, next) => {
   req.session.currentUser = null;
   res.redirect('/');
 });
