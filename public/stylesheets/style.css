@@ -15,6 +15,10 @@ input::placeholder, textarea::placeholder{
   color: #ddd;
 }
 /* -- TYPOGRAPHY -- */
+@font-face {
+  font-family: 'Phenomena'; /*a name to be used later*/
+  src: url('/stylesheets/Phenomena-Black.otf'); /*URL to font*/
+}
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
@@ -33,22 +37,26 @@ body {
   margin: 0 auto;
 }
 header{
+  width: 100%;
   padding: 10px 20px;
   background: #1371A7;
+  position: relative;
+  z-index: 1;
 }
 footer{
   background: #444;
   color: white;
   text-align: center;
   padding: 10px 20px;
+  width: 100%;
+  z-index: 999;
 }
 .content-wrapper{
-  padding: 20px;
+  padding: 95px 20px 50px;
   background: #fff;
-}
-.container {
-  padding: 20px;
-  background: #f2f4ff;
+  min-height: 100vh;
+  margin-bottom: -37px;
+  margin-top: -72px;
 }
 
 /* -- COMPONENTS -- */
@@ -77,6 +85,22 @@ button{
   /* HOME */
 .home-content{
   text-align: center;
+}
+.home-title{
+  margin: 20px 0 50px;
+}
+.home-title h1 {
+  font-family: 'Phenomena', Arial, Helvetica, sans-serif;
+  font-size: 120px;
+  margin: 0px;
+  color: #1371A7;
+}
+.home-title img{
+  width: 335px;
+}
+.home-description{
+  margin-bottom: 80px;
+  font-size: 18px;
 }
 .btn-home-signup,.btn-home-login {
   text-decoration: none;
@@ -222,4 +246,11 @@ button:active, .btn-home-signup:active,.btn-home-login:active {
   box-shadow: none;
   position: relative;
   top: 3px;
+}
+/* -- MEDIAs -- */
+@media screen and (min-width: 1024px) {
+  .content-wrapper{
+    border-left: 1px solid #444;
+    border-right: 1px solid #444;
+  }
 }
