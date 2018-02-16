@@ -2,6 +2,7 @@
 
 const express = require('express');
 const router = express.Router();
+const User = require('../models/users');
 const Job = require('../models/jobs');
 const mongoose = require('mongoose');
 // const auth = require('../helpers/authorization');
@@ -141,16 +142,6 @@ router.post('/:id/edit', (req, res, next) => {
     .catch(next);
 });
 
-router.get('/applied', (req, res, next) => {
-  if (!req.session.currentUser) {
-    return res.redirect('/');
-  }
-  if (req.session.currentUser.role !== 'student') {
-    return res.redirect('/my-jobs');
-  }
-  res.render('jobs/applied');
-});
-
 /* GET job apply */
 router.get('/:id/apply', (req, res, next) => {
   if (!req.session.currentUser) {
@@ -195,9 +186,19 @@ router.post('/:id/apply', (req, res, next) => {
     }
   };
 
-  Job.update({_id: jobId}, updates)
-    .then((job) => {
-      res.redirect('/jobs');
+  const updateApply = {
+    $addToSet: {
+      appliedJobs: jobId
+    }
+  };
+
+  User.update({_id: applicant}, updateApply)
+    .then((user) => {
+      Job.update({_id: jobId}, updates)
+        .then((job) => {
+          res.redirect('/jobs');
+        })
+        .catch(next);
     })
     .catch(next);
 

@@ -13,6 +13,7 @@ const index = require('./routes/index');
 const auth = require('./routes/auth');
 const jobs = require('./routes/jobs');
 const myjobs = require('./routes/my-jobs');
+const applied = require('./routes/applied');
 
 const app = express();
 
@@ -60,6 +61,7 @@ app.use('/', index);
 app.use('/auth', auth);
 app.use('/jobs', jobs);
 app.use('/my-jobs', myjobs);
+app.use('/applied', applied);
 
 // ERROR HANDLERS
 app.use((req, res, next) => {

@@ -1,1 +1,24 @@
-<h1>Hey there</h1>
+<div class="applied-nav">
+    <div></div>
+    <div class='nav-route'>
+        <a href="/my-jobs"> Jobs</a>
+    </div>
+  </div>
+  <h1>Applied Jobs</h1>
+  <% appliedJobs.forEach((applied) => { %>
+    <div class="job-item">
+      <div class="job-position">
+        <h2><%= applied.position %></h2>
+        <h2><%= applied.description %></h2>
+        <h2><%= applied.salary %></h2>
+      </div>
+    </div>
+  <% }) %>
+  <% if(!appliedJobs) {%>
+    <div class="job-item">
+        <div class="job-description">
+          There are no jobs applied for.
+        </div>
+      </div>
+  <% } %>
+  <span>Back to <a href="/my-jobs">My Jobs</a></span>
