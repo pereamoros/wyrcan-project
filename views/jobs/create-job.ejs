@@ -5,25 +5,25 @@
   </div>
 </div>
 <div class="create-job-wrapper">
-    <h2>Create job</h2>
-    <form method="post" action="/jobs/create-job">
-      <div class="form-input">
-        <label for="position">Job Position:</label>
-        <input type="text" name="position" id="position"/>
+  <h2>Create job</h2>
+  <form method="post" action="/jobs/create-job">
+    <div class="form-input">
+      <label for="position">Job Position:</label>
+      <input type="text" name="position" id="position"/>
+    </div>
+    <div class="form-input">
+      <label for="description">Job description:</label>
+      <input type="text" name="description" id="description"/>
+    </div>
+    <div class="form-input">
+        <label for="description">Job Salary:</label>
+        <input type="text" name="salary" id="salary"/>
       </div>
-      <div class="form-input">
-        <label for="description">Job description:</label>
-        <input type="text" name="description" id="description"/>
-      </div>
-      <div class="form-input">
-          <label for="description">Job Salary:</label>
-          <input type="text" name="salary" id="salary"/>
-        </div>
-      <% if (typeof message !== 'undefined') { %>
-        <p class="error"><%= message %></p>
-      <% } %>
-      <div class="form-button">
-        <button class="btn-create">Create</button>
-      </div>
-    </form>
-  </div>
+    <% if (typeof message !== 'undefined') { %>
+      <p class="error"><%= message %></p>
+    <% } %>
+    <div class="form-button">
+      <button class="btn-create">Create</button>
+    </div>
+  </form>
+</div>

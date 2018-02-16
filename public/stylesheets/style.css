@@ -16,8 +16,8 @@ input::placeholder, textarea::placeholder{
 }
 /* -- TYPOGRAPHY -- */
 @font-face {
-  font-family: 'Phenomena'; /*a name to be used later*/
-  src: url('/stylesheets/Phenomena-Black.otf'); /*URL to font*/
+  font-family: 'Phenomena';
+  src: url('/stylesheets/Phenomena-Black.otf');
 }
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -253,6 +253,7 @@ button:active, .btn-home-signup:active,.btn-home-login:active {
   .content-wrapper{
     border-left: 1px solid #444;
     border-right: 1px solid #444;
+    padding: 95px 50px 50px;
   }
   .btn-home-signup, .btn-home-login{
     width: 350px;

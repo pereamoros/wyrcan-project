@@ -201,30 +201,6 @@ router.post('/:id/apply', (req, res, next) => {
         .catch(next);
     })
     .catch(next);
-
-  // let appId;
-
-  // Job.find(applications).forEach(application => {
-  //   if (application.user === req.session.currentUser._id) {
-  //     appId = application.id;
-  //     console.log(appId);
-  //   }
-  // });
-
-  // Job.findByIdAndUpdate(jobId)
-  //   .then((response) => {
-  //     Job.update({_id: jobId}, updates)
-  //       .then((job) => {
-  //         res.redirect('/jobs');
-  //       });
-  //   })
-  //   .then((response) => {
-  //     Job.update({_id: jobId}, updates)
-  //       .then((job) => {
-  //         res.redirect('/jobs');
-  //       });
-  //   })
-  //   .catch(next);
 });
 
 router.post('/:id', (req, res, next) => {
