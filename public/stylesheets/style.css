@@ -33,7 +33,7 @@ body {
   margin: 0;
 }
 .main-wrapper{
-  max-width: 960px;
+  max-width: 1024px;
   margin: 0 auto;
 }
 header{
@@ -200,6 +200,7 @@ button{
 }
 .myjobs-nav a{
   line-height: 33px;
+  font-size: 18px;
 }
   /* MYJOBS ID (employer view)  */
 .applicants-item{
@@ -252,5 +253,12 @@ button:active, .btn-home-signup:active,.btn-home-login:active {
   .content-wrapper{
     border-left: 1px solid #444;
     border-right: 1px solid #444;
+  }
+  .btn-home-signup, .btn-home-login{
+    width: 350px;
+  }
+  .login-wrapper, .signup-wrapper{
+    width: 650px;
+    margin: 0 auto;
   }
 }
